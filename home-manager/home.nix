@@ -11,12 +11,14 @@
 
   gtk = {
     enable = true;
-    cursorTheme.name = "rose-pine-cursor";
+    cursorTheme.name = "BreezeX-RosePine-Linux";
   };
 
   programs = {
     home-manager.enable = true;
-
+    
+    git = {
+      enable = true;
       userName = "Kentaro Wuertele";
       userEmail = "ken@wuertele.com";
     };

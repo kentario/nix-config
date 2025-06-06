@@ -13,8 +13,9 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
+    backupFileExtension = "backup";
     users = {
-      kentaro = import ../home-manager/home.nix
+      kentaro = import ../home-manager/home.nix;
     };
   };
 
