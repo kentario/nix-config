@@ -30,17 +30,12 @@
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     useXkbConfig = true; # use xkb.options in tty.
   };
 
-  # List services that you want to enable:
   services = {
     xserver.xkb = {
       layout = "us";
@@ -79,13 +74,12 @@
     libinput.enable = true;
   };
 
-  # XDG portal.
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account.
   users.users = {
     kentaro = {
       isNormalUser = true;
@@ -96,14 +90,6 @@
   };
 
   programs = {
-    git = {
-      enable = true;
-      config = {
-        user.name = "Kentaro Wuertele";
-	user.email = "ken@wuertele.com";
-      };
-    };
-
     hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -153,15 +139,7 @@
     grim
     slurp
 
-    rose-pine-hyprcursor
     rose-pine-cursor
-    nordzy-cursor-theme
-
-    nwg-look
-    glib
-    gtk3
-    xcur2png
-    whitesur-cursors
   ];
 
   # Fonts.
