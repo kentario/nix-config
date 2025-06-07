@@ -139,9 +139,14 @@
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
       })
     )
+    swww
     rofi-wayland
     grim
     slurp
+  ];
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "discord"
   ];
 
   # Fonts.
