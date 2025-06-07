@@ -106,11 +106,6 @@
     dconf.enable = true;
   };
 
-  environment.variables = {
-#    XCURSOR_THEME = "BreezeX-RosePine-Linux";
-#    XCURSOR_SIZE = 24;
-  };
-
   environment.sessionVariables = {
     # Fix electron apps in wayland.
     NIXOS_OZONE_WL = "1";
@@ -121,26 +116,32 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    home-manager 
+    home-manager
+    
     vim
     emacs-pgtk
     kitty
+
+    betterdiscordctl
+    
     networkmanagerapplet
     brightnessctl
     wget
+    
     pywal
     pywalfox-native
+    
+    rose-pine-cursor
+    rose-pine-hyprcursor
+
     waybar
     (pkgs.waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
       })
     )
-    swww
     rofi-wayland
     grim
     slurp
-
-    rose-pine-cursor
   ];
 
   # Fonts.
