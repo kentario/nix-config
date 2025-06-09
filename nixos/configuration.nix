@@ -113,6 +113,8 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nixpkgs.config.allowUnfree = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -122,6 +124,7 @@
     emacs-pgtk
     kitty
 
+    discord
     betterdiscordctl
     
     networkmanagerapplet
@@ -143,10 +146,6 @@
     rofi-wayland
     grim
     slurp
-  ];
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "discord"
   ];
 
   # Fonts.
