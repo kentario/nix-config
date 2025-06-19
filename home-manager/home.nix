@@ -149,6 +149,10 @@
 
       # Keybindings
       bind = [
+        # Switching keyboard layouts
+	"$mainMod_SHIFT, C, exec, hyprctl keyword input:kb_variant colemak_dh"
+	"$mainMod_SHIFT, Q, exec, hyprctl keyword input:kb_variant ''"
+
         # Program shortcuts
         "$mainMod, T, exec, $terminal"
 	"$mainMod, RETURN, exec, emacs"
