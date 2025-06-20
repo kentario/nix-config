@@ -151,7 +151,11 @@
       bind = [
         # Switching keyboard layouts
 	"$mainMod_SHIFT, C, exec, hyprctl keyword input:kb_variant colemak_dh"
+	"$mainMod_SHIFT, C, exec, hyprctl keyword input:kb_options ctrl:swapcaps"
 	"$mainMod_SHIFT, Q, exec, hyprctl keyword input:kb_variant ''"
+	"$mainMod_SHIFT, Q, exec, hyprctl keyword input:kb_options ''"
+	
+	"$mainMod, F, fullscreen"
 
         # Program shortcuts
         "$mainMod, T, exec, $terminal"
