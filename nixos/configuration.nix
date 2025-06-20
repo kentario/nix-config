@@ -28,6 +28,9 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -73,6 +76,9 @@
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
+
+    # Proivdes blueman-applet and blueman-manager for bluetooth.
+    blueman.enable = true;
   };
 
   xdg.portal = {
@@ -126,6 +132,7 @@
 
     discord
     betterdiscordctl
+    prismlauncher
     
     networkmanagerapplet
     brightnessctl
