@@ -16,7 +16,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    
+
     settings = {
       # Variables
       "$terminal" = "kitty";
@@ -63,14 +63,14 @@
         rounding = 10;
         active_opacity = 1.0;
         inactive_opacity = 0.8;
-        
+
         shadow = {
           enabled = true;
           range = 4;
           render_power = 3;
           color = "rgba(1a1a1aee)";
         };
-        
+
         blur = {
           enabled = true;
           size = 3;
@@ -82,7 +82,7 @@
       # https://wiki.hyprland.org/Configuring/Variables/#animations
        animations = {
         enabled = true;
-        
+
         bezier = [
           "easeOutQuint,0.23,1,0.32,1"
           "easeInOutCubic,0.65,0.05,0.36,1"
@@ -90,7 +90,7 @@
           "almostLinear,0.5,0.5,0.75,1.0"
           "quick,0.15,0,0.1,1"
         ];
-        
+
         animation = [
           "global, 1, 10, default"
           "border, 1, 5.39, easeOutQuint"
@@ -135,7 +135,8 @@
         kb_options = "ctrl:swapcaps";
         follow_mouse = 1;
         sensitivity = 0.25;
-        
+	accel_profile = "flat";
+
         touchpad = {
           natural_scroll = false;
           scroll_factor = 0.5;
@@ -150,11 +151,11 @@
       # Keybindings
       bind = [
         # Switching keyboard layouts
-	"$mainMod_SHIFT, C, exec, hyprctl keyword input:kb_variant colemak_dh"
-	"$mainMod_SHIFT, C, exec, hyprctl keyword input:kb_options ctrl:swapcaps"
-	"$mainMod_SHIFT, Q, exec, hyprctl keyword input:kb_variant ''"
-	"$mainMod_SHIFT, Q, exec, hyprctl keyword input:kb_options ''"
-	
+	"$mainMod SHIFT, C, exec, hyprctl keyword input:kb_variant colemak_dh"
+	"$mainMod SHIFT, C, exec, hyprctl keyword input:kb_options ctrl:swapcaps"
+	"$mainMod SHIFT, Q, exec, hyprctl keyword input:kb_variant ''"
+	"$mainMod SHIFT, Q, exec, hyprctl keyword input:kb_options ''"
+
 	"$mainMod, F, fullscreen"
 
         # Program shortcuts
@@ -171,10 +172,10 @@
 	"$mainMod, J, togglesplit," # dwindle
 
 	# Move focus with mainMod + arrow keys
-	"$mainMod, left, movefocus, l"
-	"$mainMod, right, movefocus, r"
-	"$mainMod, up, movefocus, u"
-	"$mainMod, down, movefocus, d"
+	"$mainMod SHIFT, S, movefocus, l"
+	"$mainMod SHIFT, E, movefocus, r"
+	"$mainMod SHIFT, T, movefocus, u"
+	"$mainMod SHIFT, N, movefocus, d"
 
 	# Switch workspaces with mainMod + [0-9]
 	"$mainMod, 1, workspace, 1"
@@ -251,7 +252,7 @@
     };
 
     home-manager.enable = true;
-    
+
     git = {
       enable = true;
       userName = "Kentaro Wuertele";
@@ -269,7 +270,7 @@
     # # Hyprland startup script
     # ".config/hypr/start.sh" = {
     #   executable = true;
-      
+
     #   text = ''
     #     #!/usr/bin/env bash
 
