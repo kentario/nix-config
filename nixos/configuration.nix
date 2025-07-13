@@ -23,6 +23,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Default power management tool.
+  powerManagement.enable = true;
+
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -41,6 +44,9 @@
   };
 
   services = {
+    # Tool to save power on laptops.
+    tlp.enable = true;
+
     xserver.xkb = {
       layout = "us";
       variant = "colemak_dh";
@@ -130,6 +136,7 @@
     emacs-pgtk
     kitty
 
+    ungoogled-chromium
     discord
     betterdiscordctl
     prismlauncher
