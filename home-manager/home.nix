@@ -162,6 +162,7 @@
         "$mainMod, T, exec, $terminal"
 	"$mainMod, RETURN, exec, emacs"
 	"$mainMod, L, exec, $browser"
+	"$mainMod, O, exec, wl-kbptr"
 	"$mainMod, C, killactive,"
 	"$mainMod, M, exit,"
 	"$mainMod, E, exec, $fileManager"

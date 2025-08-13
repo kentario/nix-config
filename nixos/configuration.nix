@@ -79,6 +79,12 @@
 
     # Enable CUPS to print documents.
     printing.enable = true;
+    # Enable autodiscovery of network printers
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
@@ -135,6 +141,8 @@
     vim
     emacs-pgtk
     kitty
+
+    wl-kbptr
 
     ungoogled-chromium
     discord
