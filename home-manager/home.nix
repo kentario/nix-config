@@ -243,16 +243,14 @@
   };
 
   programs = {
-    obs-studio = {
-      enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-        wlrobs
-        obs-backgroundremoval
-        obs-pipewire-audio-capture
-      ];
-    };
-
     home-manager.enable = true;
+    bash.enable = true;
+    
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;
+    };
 
     git = {
       enable = true;
@@ -261,6 +259,15 @@
     };
 
     waybar.enable = true;
+
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-backgroundremoval
+        obs-pipewire-audio-capture
+      ];
+    };
   };
 
   home.sessionVariables = {
