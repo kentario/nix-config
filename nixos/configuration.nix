@@ -152,7 +152,8 @@
     networkmanagerapplet
     brightnessctl
     wget
-    
+    mpv
+
     pywal
     pywalfox-native
     
