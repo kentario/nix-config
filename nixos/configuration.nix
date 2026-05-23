@@ -47,6 +47,9 @@
     # Tool to save power on laptops.
     tlp.enable = true;
 
+    # Enable automounting of removable media.
+    udisks2.enable = true;
+
     xserver.xkb = {
       layout = "us";
       variant = "colemak_dh";
@@ -78,7 +81,15 @@
     openssh.enable = true;
 
     # Enable CUPS to print documents.
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        brlaser
+	brgenml1lpr
+	brgenml1cupswrapper
+      ];
+    };
+    
     # Enable autodiscovery of network printers
     avahi = {
       enable = true;
@@ -118,6 +129,13 @@
       enable = true;
     };
 
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    };
+
     # GNOME application for managing stuff in the GNOME keyring.
     seahorse.enable = true;
 
@@ -148,6 +166,8 @@
     discord
     betterdiscordctl
     prismlauncher
+    djview
+    qidi-slicer-bin
     
     networkmanagerapplet
     brightnessctl
