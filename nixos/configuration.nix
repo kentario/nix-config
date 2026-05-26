@@ -185,8 +185,8 @@
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
       })
     )
-    swww
-    rofi-wayland
+    awww
+    rofi
     grim
     slurp
   ];

@@ -42,8 +42,8 @@
 
       # Autostart
       exec-once = [
-        "swww-daemon"
-	"swww img $HOME/Wallpapers/eclipse.png"
+        "awww-daemon"
+	"awww img $HOME/Wallpapers/eclipse.png"
 	"nm-applet --indicator"
 	"waybar"
 
@@ -125,7 +125,7 @@
 
       # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
       dwindle = {
-        pseudotile = true;
+#        pseudotile = true;
 	preserve_split = true;
       };
 
@@ -156,9 +156,9 @@
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#gestures
-      gestures = {
-        workspace_swipe = false;
-      };
+#      gestures = {
+#        workspace_swipe = false;
+#      };
 
       # Keybindings
       bind = [
@@ -182,7 +182,7 @@
 	"$mainMod, SLASH, exec, $menu"
 	"$mainMod, S, exec, $screenshot"
 	"$mainMod, P, pseudo," # dwindle
-	"$mainMod, J, togglesplit," # dwindle
+#	"$mainMod, J, togglesplit," # dwindle
 
 	# Move focus with mainMod + arrow keys
 	"$mainMod SHIFT, S, movefocus, l"
@@ -243,12 +243,12 @@
 	", XF86AudioPrev, exec, playerctl previous"
       ];
 
-      windowrulev2 = [
+#      windowrulev2 = [
         # Ignore maximize requests from apps. You'll probably like this.
-	"suppressevent maximize, class:.*"
+#	"suppressevent maximize, class:.*"
 	# Fix some dragging issues with XWayland
-	"nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-      ];
+#	"nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+#      ];
     };
 
     systemd.variables = [ "--all" ];
@@ -284,26 +284,6 @@
 
   home.sessionVariables = {
     EDITOR = "emacs";
-  };
-
-  home.file = {
-    # # Hyprland startup script
-    # ".config/hypr/start.sh" = {
-    #   executable = true;
-
-    #   text = ''
-    #     #!/usr/bin/env bash
-
-    #     # Initializing wallpaper daemon
-    #     swww init &
-    #     # Setting wallpaper
-    #     swww img "~/Wallpapers/eclipse.png"
-
-    #     nm-applet --indicator &
-
-    #     waybar &
-    #   '';
-    # };
   };
 
   home.stateVersion = "25.05"; # Please read the comment before changing.
