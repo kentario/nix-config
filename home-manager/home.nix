@@ -266,8 +266,13 @@
 
     git = {
       enable = true;
-      userName = "Kentaro Wuertele";
-      userEmail = "ken@wuertele.com";
+      settings = {
+        user = {
+          name = "Kentaro Wuertele";
+          email = "ken@wuertele.com";
+	};
+	init.defaultBranch = "main";
+      };
     };
 
     waybar.enable = true;
