@@ -26,11 +26,6 @@
     cursorTheme.name = "BreezeX-RosePine-Linux";
   };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    configType = "lua";
-    systemd.variables = [ "--all" ];
-  };
   xdg.configFile."hypr/hyprland.lua".source = ./hypr/hyprland.lua;
 
   programs = {
