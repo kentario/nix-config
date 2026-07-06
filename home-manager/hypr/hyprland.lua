@@ -33,7 +33,7 @@ local screenshot = "grim -g \"$(slurp)\""
 --
 hl.on("hyprland.start", function ()
   hl.exec_cmd("awww-daemon")
-  hl.exec_cmd("awww img $HOME/Wallpapers/eclipse.png")
+  hl.exec_cmd("awww img ../wallpapers/eclipse.png")
   hl.exec_cmd("nm-applet --indicator")
   hl.exec_cmd("waybar")
   hl.exec_cmd("hyprctl dispatch workspace 1; emacs")
