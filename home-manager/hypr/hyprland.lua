@@ -1,15 +1,3 @@
--- This is an example Hyprland Lua config file.
--- Refer to the wiki for more information.
--- https://wiki.hypr.land/Configuring/Start/
-
--- Please note not all available settings / options are set here.
--- For a full list, see the wiki
-
--- You can (and should!!) split this configuration into multiple files
--- Create your files separately and then require them like this:
--- require("myColors")
-
-
 ------------------
 ---- MONITORS ----
 ------------------
@@ -22,16 +10,17 @@ hl.monitor({
     scale    = "auto",
 })
 
-
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
 
 -- Set programs that you use
-local terminal    = "kitty"
-local fileManager = "dolphin"
-local menu        = "hyprlauncher"
+local terminal   = "kitty"
+local browser    = "firefox"
+local menu       = "rofi -show drun -show-icons"
+local screenshot = "grim -g \"$(slurp)\""
 
+-- local fileManager = "dolphin"
 
 -------------------
 ---- AUTOSTART ----
@@ -40,43 +29,25 @@ local menu        = "hyprlauncher"
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
--- Or execute your favorite apps at launch like this:
+-- Or execute your favorite apps at launch
 --
--- hl.on("hyprland.start", function () 
---   hl.exec_cmd(terminal)
---   hl.exec_cmd("nm-applet")
---   hl.exec_cmd("waybar & hyprpaper & firefox")
--- end)
-
+hl.on("hyprland.start", function ()
+  hl.exec_cmd("awww-daemon")
+  hl.exec_cmd("awww img $HOME/Wallpapers/eclipse.png")
+  hl.exec_cmd("nm-applet --indicator")
+  hl.exec_cmd("waybar")
+  hl.exec_cmd("hyprctl dispatch workspace 1; emacs")
+  hl.exec_cmd("hyprctl dispatch workspace 2; " .. browser)
+  hl.exec_cmd("hyprctl dispatch workspace 3; " .. terminal)
+end)
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
-
-hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_THEME", "rose-pine-hyprcursor")
 hl.env("HYPRCURSOR_SIZE", "24")
-
-
------------------------
------ PERMISSIONS -----
------------------------
-
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Permissions/
--- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
--- for security reasons
-
--- hl.config({
---   ecosystem = {
---     enforce_permissions = true,
---   },
--- })
-
--- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
--- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
--- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
-
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -86,10 +57,9 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.config({
     general = {
         gaps_in  = 5,
-        gaps_out = 20,
+        gaps_out = 10,
 
         border_size = 2,
-
         col = {
             active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
             inactive_border = "rgba(595959aa)",
@@ -110,7 +80,7 @@ hl.config({
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+        inactive_opacity = 0.8,
 
         shadow = {
             enabled      = true,
@@ -218,26 +188,28 @@ hl.config({
 hl.config({
     input = {
         kb_layout  = "us",
-        kb_variant = "",
+        kb_variant = "colemak_dh",
         kb_model   = "",
-        kb_options = "",
+        kb_options = "ctrl:swapcaps",
         kb_rules   = "",
 
         follow_mouse = 1,
 
-        sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
+        sensitivity = 0.25, -- -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
-            natural_scroll = false,
+	    disable_while_typing = false,
+            natural_scroll       = false,
+	    scroll_factor        = 0.5,
         },
     },
 })
 
-hl.gesture({
-    fingers = 3,
-    direction = "horizontal",
-    action = "workspace"
-})
+-- hl.gesture({
+--     fingers = 3,
+--     direction = "horizontal",
+--     action = "workspace"
+-- })
 
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
@@ -253,22 +225,45 @@ hl.device({
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+-- https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle"} ))
+
+-- SWITCHING KEYBOARD LAYOUTS
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl keyword input:kb_variant colemak_dh"))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl keyword input:kb_options ctrl:swapcaps"))
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("hyprctl keyword input:kb_variant ''"))
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("hyprctl keyword input:kb_options ''"))
+
+-- PROGRAM SHORTCUTS
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("emacs"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("wl-kbptr"))
+
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+-- closeWindowBind:set_enabled(false)  ?? idk what this means and why it's in the default
+
+-- hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+-- TODO: switch to the previous command
+hl.bind(mainMod .. " + M", hl.dsp.exit)
+
+-- TODO: get a file manager
+-- hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + SLASH", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(screenshot))
+
+-- TODO: learn what these 2 do.
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
--- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+-- Move focus with mainMod + home row directions
+hl.bind(mainMod .. " + SHIFT + S",  hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + T",    hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + N",  hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -279,8 +274,8 @@ for i = 1, 10 do
 end
 
 -- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+-- hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
+-- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -354,3 +349,22 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
+
+
+-----------------------
+----- PERMISSIONS ----- unused
+-----------------------
+
+-- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Permissions/
+-- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
+-- for security reasons
+
+-- hl.config({
+--   ecosystem = {
+--     enforce_permissions = true,
+--   },
+-- })
+
+-- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
+-- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
+-- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
