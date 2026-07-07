@@ -62,8 +62,8 @@
       enable = true;
       settings = {
         default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland --asterisks --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'";
-	user = "greeter";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland --asterisks --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'";
+	  user = "greeter";
         };
       };
     };
@@ -104,6 +104,12 @@
 
     # Proivdes blueman-applet and blueman-manager for bluetooth.
     blueman.enable = true;
+
+    # Set emacs as the default editor
+    emacs = {
+      enable = true;
+      defaultEditor = true;
+    };
   };
 
   xdg.portal = {
@@ -158,9 +164,11 @@
   environment.systemPackages = with pkgs; [
     home-manager
     
+    gcc
+
     vim
-    emacs-pgtk
     kitty
+    emacs-pgtk
 
     wl-kbptr
 
@@ -184,8 +192,8 @@
 
     waybar
     (pkgs.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      })
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    })
     )
     awww
     rofi
