@@ -23,6 +23,14 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Automatic garbage collection.
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 15d";
+  };
+  nix.settings.auto-optimise-store = true;
+
   # Default power management tool.
   powerManagement.enable = true;
 
