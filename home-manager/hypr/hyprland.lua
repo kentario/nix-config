@@ -187,10 +187,10 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "us",
-        kb_variant = "colemak_dh",
+        kb_layout  = "us,us",
+        kb_variant = "colemak_dh,",
         kb_model   = "",
-        kb_options = "ctrl:swapcaps",
+        kb_options = "ctrl:swapcaps,",
         kb_rules   = "",
 
         follow_mouse = 1,
@@ -230,13 +230,12 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle"} ))
 
 -- SWITCHING KEYBOARD LAYOUTS
-hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl keyword input:kb_variant colemak_dh"))
-hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl keyword input:kb_options ctrl:swapcaps"))
-hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("hyprctl keyword input:kb_variant ''"))
-hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("hyprctl keyword input:kb_options ''"))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl switchxkblayout all 0"))
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("hyprctl switchxkblayout all 1"))
 
 -- PROGRAM SHORTCUTS
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
+-- TODO: https://wiki.hypr.land/Configuring/Basics/Dispatchers/#executing-with-rules
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("emacs"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("wl-kbptr"))
