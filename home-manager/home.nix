@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
+let
+  link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/${path}";
+  
+in
 {
+  
   home.username = "kentaro";
   home.homeDirectory = "/home/kentaro";
 
@@ -25,8 +30,6 @@
     enable = true;
     cursorTheme.name = "BreezeX-RosePine-Linux";
   };
-
-  xdg.configFile."hypr/hyprland.lua".source = ./hypr/hyprland.lua;
 
   programs = {
     home-manager.enable = true;
@@ -59,6 +62,11 @@
         obs-pipewire-audio-capture
       ];
     };
+  };
+
+  xdg.configFile = {
+    "hypr/hyprland.lua".source = link "hypr/hyprland.lua";
+    "waybar/config.jsonc".source = link "waybar/config.jsonc";
   };
 
   home.stateVersion = "25.05"; # Please read the comment before changing.
