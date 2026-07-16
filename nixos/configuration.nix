@@ -7,7 +7,7 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
       inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -180,6 +180,8 @@
 
     wl-kbptr
 
+    typst
+
     ungoogled-chromium
     discord
     betterdiscordctl
@@ -194,6 +196,7 @@
 
     pywal
     pywalfox-native
+    hellwal
     
     rose-pine-cursor
     rose-pine-hyprcursor
@@ -215,6 +218,7 @@
     packages = with pkgs; [
       font-awesome
       noto-fonts
+      noto-fonts-cjk-sans
       fira-sans
       fira-mono
     ];
