@@ -173,6 +173,8 @@
     home-manager
     
     gcc
+    btop
+    killall
 
     vim
     kitty

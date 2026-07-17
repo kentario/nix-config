@@ -5,7 +5,6 @@ let
   
 in
 {
-  
   home.username = "kentaro";
   home.homeDirectory = "/home/kentaro";
 
@@ -33,7 +32,14 @@ in
 
   programs = {
     home-manager.enable = true;
-    bash.enable = true;
+
+    bash = {
+      enable = true;
+      shellAliases = {
+	s = "sudo";
+	nrs = "nixos-rebuild switch --impure --flake ~/nix-config/#nixos";
+      };
+    };
     
     direnv = {
       enable = true;
@@ -67,6 +73,7 @@ in
   xdg.configFile = {
     "hypr/hyprland.lua".source = link "hypr/hyprland.lua";
     "waybar/config.jsonc".source = link "waybar/config.jsonc";
+    "waybar/style.css".source = link "waybar/style.css";
   };
 
   home.stateVersion = "25.05"; # Please read the comment before changing.
