@@ -233,6 +233,9 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", actio
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl switchxkblayout all 0"))
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("hyprctl switchxkblayout all 1"))
 
+-- Reloading hyprland and waybar
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl reload && pkill -SIGUSR2 -f waybar"))
+
 -- PROGRAM SHORTCUTS
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 -- TODO: https://wiki.hypr.land/Configuring/Basics/Dispatchers/#executing-with-rules
