@@ -203,6 +203,7 @@
     rose-pine-cursor
     rose-pine-hyprcursor
 
+    hyprshutdown
     waybar
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

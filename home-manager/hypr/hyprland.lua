@@ -246,9 +246,7 @@ hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("wl-kbptr"))
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)  ?? idk what this means and why it's in the default
 
--- hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
--- TODO: switch to the previous command
-hl.bind(mainMod .. " + M", hl.dsp.exit)
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
 -- TODO: get a file manager
 -- hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
