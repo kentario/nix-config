@@ -36,7 +36,7 @@ in
     bash = {
       enable = true;
       shellAliases = {
-	s = "sudo";
+	s = "sudo ";
 	nrs = "nixos-rebuild switch --impure --flake ~/nix-config/#nixos";
       };
     };
