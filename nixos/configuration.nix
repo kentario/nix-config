@@ -69,10 +69,18 @@
     displayManager.ly = {
       enable = true;
       settings = {
-	animiation = "dur_file";
-	dur_file_path = builtins.toString ../blackhole-smooth-240x67.dur;
+	animate = true;
+	animation = "dur_file";
+	dur_file_path = builtins.toString ../ly/blackhole-smooth-240x67.dur;
+
+	start_cmd = builtins.toString ../ly/startup.sh;
+
 	full_color = true;
+
 	clear_password = true;
+
+	battery_id = "BAT1";
+	clock = "%c";
       };
     };
 
@@ -232,8 +240,10 @@
     enableDefaultPackages = true;
     packages = with pkgs; [
       font-awesome
+      font-awesome_4
       noto-fonts
       noto-fonts-cjk-sans
+      noto-fonts-color-emoji
       fira-sans
       fira-mono
     ];
@@ -243,6 +253,7 @@
         serif = [ "Noto Sans" ];
 	sansSerif = [ "Fira Sans" ];
 	monospace = [ "Fira Mono" ];
+	emoji = [ "Noto Color Emoji" ];
       };
     };
   };
