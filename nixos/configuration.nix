@@ -54,6 +54,18 @@
   };
 
   services = {
+    kmscon = {
+      enable = true;
+
+      fonts = [
+	{
+	  name = "Fira Mono";
+	  package = pkgs.fira-mono;
+	}
+      ];
+
+      extraConfig = "font-size=20";
+    };
     # Tool to save power on laptops.
     tlp.enable = true;
 
@@ -83,16 +95,6 @@
 	clock = "%c";
       };
     };
-
-#    greetd = {
-#      enable = true;
-#      settings = {
-#        default_session = {
-#	  command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland --asterisks --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'";
-#	  user = "greeter";
-#        };
-#      };
-#    };
 
     # Enable sound.
     pipewire = {
