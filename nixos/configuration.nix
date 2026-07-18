@@ -66,15 +66,25 @@
       options = "ctrl:swapcaps";
     };
 
-    greetd = {
+    displayManager.ly = {
       enable = true;
       settings = {
-        default_session = {
-	  command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland --asterisks --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'";
-	  user = "greeter";
-        };
+	animiation = "dur_file";
+	dur_file_path = builtins.toString ../blackhole-smooth-240x67.dur;
+	full_color = true;
+	clear_password = true;
       };
     };
+
+#    greetd = {
+#      enable = true;
+#      settings = {
+#        default_session = {
+#	  command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland --asterisks --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'";
+#	  user = "greeter";
+#        };
+#      };
+#    };
 
     # Enable sound.
     pipewire = {
