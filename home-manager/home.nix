@@ -60,6 +60,12 @@ in
 
     waybar.enable = true;
 
+    keepassxc.settings = {
+      Browser = {
+	Enabled = true;
+      };
+    };
+
     obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [

@@ -234,7 +234,7 @@ hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprctl switchxkblayout all 
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("hyprctl switchxkblayout all 1"))
 
 -- Reloading hyprland and waybar
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl reload && pkill -SIGUSR2 -f waybar"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl reload && (pkill -SIGUSR2 -f waybar || waybar)"))
 
 -- PROGRAM SHORTCUTS
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
