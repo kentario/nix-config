@@ -40,11 +40,15 @@ in
 	nrs = "nixos-rebuild switch --impure --flake ~/nix-config/#nixos";
       };
     };
-    
+
     direnv = {
       enable = true;
       enableBashIntegration = true;
       nix-direnv.enable = true;
+    };
+
+    rofi = {
+      theme = "Arc-Dark";
     };
 
     git = {
