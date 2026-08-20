@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager?ref=master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -20,12 +20,13 @@
         allowUnfree = true;
       };
     };
+    myAddon = pkgs.callPackage /home/kentaro/nixpkgs/pkgs/by-name/an/anki/addons/jisho-kanji-stroke-order { };
   in
   {
 
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
-	specialArgs = { inherit inputs system; };
+	specialArgs = { inherit inputs system myAddon; };
 
         modules = [
 	  ./nixos/configuration.nix
