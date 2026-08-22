@@ -1,8 +1,9 @@
+
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, myAddon, ... }:
 
 {
   imports =
@@ -44,6 +45,11 @@
     powerOnBoot = true;
   };
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -57,14 +63,10 @@
     kmscon = {
       enable = true;
 
-      fonts = [
-	{
-	  name = "Fira Mono";
-	  package = pkgs.fira-mono;
-	}
-      ];
-
-      extraConfig = "font-size=20";
+      config = {
+	font-name = "Fira Mono";
+	font-size = 20;
+      };
     };
     # Tool to save power on laptops.
     tlp.enable = true;
@@ -171,6 +173,9 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
+    # Allows games to ask for temporary optimizations.
+    # gamemoderun ./game, or on steam, add gamemoderun %command% to the launch options in properties of the game.
+    gamemode.enable = true;
 
     # GNOME application for managing stuff in the GNOME keyring.
     seahorse.enable = true;
@@ -199,6 +204,7 @@
     vim
     kitty
     emacs-pgtk
+    keepassxc
 
     wl-kbptr
 
@@ -210,7 +216,18 @@
     prismlauncher
     djview
     qidi-slicer-bin
+
     (anki.withAddons [
+      # (ankiAddons.puppy-reinforcement.withConfig {
+      # 	config = {
+      # 	  encourage_every = 1;
+      # 	};
+      # })
+      (myAddon.withConfig {
+       	config = {
+       	  note_types = [ "*Kanji*" ];
+      	};
+      })
     ])
     
     networkmanagerapplet
@@ -244,6 +261,7 @@
       font-awesome
       font-awesome_4
       noto-fonts
+      noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
       fira-sans
@@ -252,8 +270,9 @@
 
     fontconfig = {
       defaultFonts = {
-        serif = [ "Noto Sans" ];
-	sansSerif = [ "Fira Sans" ];
+        serif = [ "Noto Serif CJK JP" ];
+	sansSerif = [ "Noto Sans CJK JP" ];
+#	sansSerif = [ "Fira Sans" ];
 	monospace = [ "Fira Mono" ];
 	emoji = [ "Noto Color Emoji" ];
       };
