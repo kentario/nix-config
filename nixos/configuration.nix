@@ -28,7 +28,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 15d";
+    options = "--delete-older-than 100d";
   };
   nix.settings.auto-optimise-store = true;
 
@@ -54,6 +54,37 @@
   time.timeZone = "America/Los_Angeles";
 
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      waylandFrontend = true;
+
+      addons = with pkgs; [
+	fcitx5-mozc
+	fcitx5-gtk
+      ];
+
+      settings = {
+	inputMethod = {
+	  GroupOrder."0" = "Default";
+          "Groups/0" = {
+            Name = "Default";
+            "Default Layout" = "us";
+            DefaultIM = "keyboard-us";
+          };
+          "Groups/0/Items/0".Name = "keyboard-us";
+          "Groups/0/Items/1".Name = "mozc";
+	};
+	globalOptions = {
+	  "Hotkey/TriggerKeys"."0" = "Super+space";
+	};
+      };
+
+      ignoreUserConfig = true;
+    };
+  };
+
   console = {
     font = "Lat2-Terminus16";
     useXkbConfig = true; # use xkb.options in tty.
@@ -76,7 +107,7 @@
 
     xserver.xkb = {
       layout = "us";
-      variant = "colemak_dh";
+      variant = "colemak_dh,";
       options = "ctrl:swapcaps";
     };
 
@@ -121,7 +152,7 @@
 	brgenml1cupswrapper
       ];
     };
-    
+
     # Enable autodiscovery of network printers
     avahi = {
       enable = true;
@@ -196,7 +227,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
-    
+
     gcc
     btop
     killall
@@ -218,18 +249,18 @@
     qidi-slicer-bin
 
     (anki.withAddons [
-      # (ankiAddons.puppy-reinforcement.withConfig {
-      # 	config = {
-      # 	  encourage_every = 1;
-      # 	};
-      # })
+      (ankiAddons.puppy-reinforcement.withConfig {
+       	config = {
+       	  encourage_every = 1;
+       	};
+      })
       (myAddon.withConfig {
        	config = {
-       	  note_types = [ "*Kanji*" ];
+       	  note_types = [ "*kanji*" "*kaishi*" "*japan*" ];
       	};
       })
     ])
-    
+
     networkmanagerapplet
     brightnessctl
     wget
@@ -238,7 +269,7 @@
     pywal
     pywalfox-native
     hellwal
-    
+
     rose-pine-cursor
     rose-pine-hyprcursor
 
@@ -270,10 +301,10 @@
 
     fontconfig = {
       defaultFonts = {
+	monospace = [ "Fira Mono" ];
         serif = [ "Noto Serif CJK JP" ];
 	sansSerif = [ "Noto Sans CJK JP" ];
 #	sansSerif = [ "Fira Sans" ];
-	monospace = [ "Fira Mono" ];
 	emoji = [ "Noto Color Emoji" ];
       };
     };
