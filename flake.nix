@@ -20,7 +20,9 @@
         allowUnfree = true;
       };
     };
-    myAddon = pkgs.callPackage /home/kentaro/nixpkgs/pkgs/by-name/an/anki/addons/jisho-kanji-stroke-order { };
+
+    kanjivg = pkgs.callPackage /home/kentaro/nixpkgs/pkgs/by-name/ka/kanjivg/package.nix { };
+    myAddon = pkgs.callPackage /home/kentaro/nixpkgs/pkgs/by-name/an/anki/addons/jisho-kanji-stroke-order { inherit kanjivg; };
   in
   {
 
